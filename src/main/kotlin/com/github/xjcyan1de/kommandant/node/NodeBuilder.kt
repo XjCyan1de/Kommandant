@@ -1,6 +1,7 @@
 package com.github.xjcyan1de.kommandant.node
 
 import com.github.xjcyan1de.kommandant.Execution
+import com.github.xjcyan1de.kommandant.OptionalContext
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.arguments.*
 import com.mojang.brigadier.builder.ArgumentBuilder
@@ -8,6 +9,12 @@ import com.mojang.brigadier.tree.CommandNode
 
 @Suppress("UNCHECKED_CAST")
 abstract class NodeBuilder<T, B : NodeBuilder<T, B>> : ArgumentBuilder<T, B>() {
+    fun executes(command: OptionalContext<T>.(T)->Unit): B = apply {
+        executes { source, context ->
+            command(context, source)
+        }
+    } as B
+
     fun executes(command: Execution<T>): B = apply {
         executes(command as Command<T>)
     } as B

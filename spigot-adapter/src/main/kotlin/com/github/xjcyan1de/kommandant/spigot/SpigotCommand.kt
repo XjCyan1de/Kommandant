@@ -1,3 +1,5 @@
+@file:Suppress("INAPPLICABLE_JVM_NAME") // https://youtrack.jetbrains.com/issue/KT-31420
+
 package com.github.xjcyan1de.kommandant.spigot
 
 import com.github.xjcyan1de.kommandant.CommandWrapper
@@ -22,7 +24,8 @@ class SpigotCommand(
         if (!testPermission(sender)) {
             return true
         } else {
-            val reader = StringReader(join(label, args))
+            val input = join(label, args)
+            val reader = StringReader(input)
 
             if (reader.canRead() && reader.peek() == '/') {
                 reader.skip()

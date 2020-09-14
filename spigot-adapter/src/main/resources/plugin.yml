@@ -1,0 +1,4 @@
+name: Kommandant
+version: 1.0
+api-version: 1.16
+main: com.github.xjcyan1de.kommandant.spigot.TestPlugin

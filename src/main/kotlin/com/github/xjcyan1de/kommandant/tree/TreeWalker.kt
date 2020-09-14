@@ -1,14 +1,16 @@
 package com.github.xjcyan1de.kommandant.tree
 
+import com.github.xjcyan1de.kommandant.Mutable
 import com.github.xjcyan1de.kommandant.util.remove
 import com.mojang.brigadier.tree.CommandNode
 import com.mojang.brigadier.tree.RootCommandNode
 import java.util.*
 import java.util.function.Predicate
 
-class TreeWalker<T, R>(mapper: Mapper<T, R>) {
-    private val mapper: Mapper<T, R> = mapper
-    val mappings: MutableMap<CommandNode<T>, CommandNode<R>?>
+class TreeWalker<T, R>(
+        private val mapper: Mapper<T, R>
+) {
+    val mappings: MutableMap<CommandNode<T>, CommandNode<R>> = IdentityHashMap()
 
     fun prune(root: RootCommandNode<R>, commands: Collection<CommandNode<T>>) {
         for (child in commands) {
@@ -47,20 +49,20 @@ class TreeWalker<T, R>(mapper: Mapper<T, R>) {
         return result
     }
 
-    fun redirect(destination: CommandNode<T>?, result: CommandNode<R>?, source: T?) {
-        TODO()
-    }
-
-    fun descend(children: Collection<CommandNode<T>>, command: CommandNode<R>?, source: T?) {
-        for (child in children) {
-            val result = map(child, source)
-            if (result != null) {
-                command!!.addChild(result)
-            }
+    @Suppress("UNCHECKED_CAST")
+    fun redirect(destination: CommandNode<T>?, result: CommandNode<R>, source: T?) {
+        if (destination != null && result is Mutable<*>) {
+            result as Mutable<R>
+            result.setRedirect( map(destination, source))
         }
     }
 
-    init {
-        mappings = IdentityHashMap()
+    fun descend(children: Collection<CommandNode<T>>, command: CommandNode<R>, source: T?) {
+        for (child in children) {
+            val result = map(child, source)
+            if (result != null) {
+                command.addChild(result)
+            }
+        }
     }
 }

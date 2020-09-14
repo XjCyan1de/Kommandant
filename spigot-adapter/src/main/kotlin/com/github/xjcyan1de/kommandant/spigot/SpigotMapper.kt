@@ -4,13 +4,13 @@ import com.github.xjcyan1de.kommandant.MappedArgumentType
 import com.github.xjcyan1de.kommandant.tree.Mapper
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.ArgumentType
+import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.suggestion.SuggestionProvider
 import com.mojang.brigadier.tree.ArgumentCommandNode
 import com.mojang.brigadier.tree.CommandNode
 import org.bukkit.command.CommandSender
 import java.util.*
 import java.util.function.Predicate
-
 
 @Suppress("UNCHECKED_CAST")
 internal class SpigotMapper(
@@ -28,7 +28,27 @@ internal class SpigotMapper(
     }
 
     override fun suggestions(command: ArgumentCommandNode<CommandSender, *>): SuggestionProvider<Any>? {
-        TODO()
+        val type = command.type
+        val suggestor = command.customSuggestions
+
+        if (type !is MappedArgumentType<*> && suggestor == null) return null
+        if (suggestor == null) return reparse(type as MappedArgumentType<*>)
+
+        return CLIENT_SIDE[suggestor] ?: reparse(suggestor)
+    }
+
+    private fun reparse(type: MappedArgumentType<*>): SuggestionProvider<Any>? = SuggestionProvider<Any> { context, suggestions ->
+        val sender = context.bukkitSender
+        val input = context.input.let { if (it.length <= 1) "" else it.substring(1) }
+        val reparsed = dispatcher.parse(input, sender).context.build(context.input)
+        type.listSuggestions(reparsed, suggestions)
+    }
+
+    private fun reparse(suggestor: SuggestionProvider<CommandSender>): SuggestionProvider<Any> = SuggestionProvider { context, suggestions ->
+        val sender = context.bukkitSender
+        val input = context.input.let { if (it.length <= 1) "" else it.substring(1) }
+        val reparsed = dispatcher.parse(input, sender).context.build(context.input)
+        suggestor.getSuggestions(reparsed, suggestions)
     }
 
     companion object {
@@ -41,13 +61,15 @@ internal class SpigotMapper(
         val CommandListenerWrapper_CLASS = nms<Any>("CommandListenerWrapper")
         val CommandListenerWrapper_getBukkitSender = CommandListenerWrapper_CLASS.getDeclaredMethod("getBukkitSender")
 
-        val CLIENT_SIDE = EnumMap<ClientSuggestionProvider, SuggestionProvider<*>>(ClientSuggestionProvider::class.java)
+        val CLIENT_SIDE = EnumMap<ClientSuggestionProvider, SuggestionProvider<Any>>(ClientSuggestionProvider::class.java)
+
+        val CommandContext<Any>.bukkitSender get() = CommandListenerWrapper_getBukkitSender.invoke(source) as CommandSender
 
         init {
-            CLIENT_SIDE[ClientSuggestionProvider.RECIPES] = CompletionProviders_b.get(null) as SuggestionProvider<*>
-            CLIENT_SIDE[ClientSuggestionProvider.SOUNDS] = CompletionProviders_c.get(null) as SuggestionProvider<*>
-            CLIENT_SIDE[ClientSuggestionProvider.BIOMES] = CompletionProviders_d.get(null) as SuggestionProvider<*>
-            CLIENT_SIDE[ClientSuggestionProvider.ENTITIES] = CompletionProviders_e.get(null) as SuggestionProvider<*>
+            CLIENT_SIDE[ClientSuggestionProvider.RECIPES] = CompletionProviders_b.get(null) as SuggestionProvider<Any>
+            CLIENT_SIDE[ClientSuggestionProvider.SOUNDS] = CompletionProviders_c.get(null) as SuggestionProvider<Any>
+            CLIENT_SIDE[ClientSuggestionProvider.BIOMES] = CompletionProviders_d.get(null) as SuggestionProvider<Any>
+            CLIENT_SIDE[ClientSuggestionProvider.ENTITIES] = CompletionProviders_e.get(null) as SuggestionProvider<Any>
         }
     }
 }

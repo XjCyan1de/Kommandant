@@ -1,4 +1,4 @@
-package com.github.xjcyan1de.kommandant.node
+package com.github.xjcyan1de.kommandant
 
 import com.mojang.brigadier.tree.LiteralCommandNode
 
