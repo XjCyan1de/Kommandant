@@ -6,8 +6,8 @@ import com.mojang.brigadier.tree.LiteralCommandNode
 import com.mojang.brigadier.tree.RootCommandNode
 import org.bukkit.command.CommandSender
 import src.main.com.github.xjcyan1de.kommandant.Aliasable
-import src.main.com.github.xjcyan1de.kommandant.Mutable
 import src.main.com.github.xjcyan1de.kommandant.CommandMap
+import src.main.com.github.xjcyan1de.kommandant.Mutable
 import src.main.com.github.xjcyan1de.kommandant.util.Commands.remove
 import java.util.*
 

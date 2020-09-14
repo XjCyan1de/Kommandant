@@ -19,20 +19,20 @@ object Nodes {
             }
         }
         if (current is Aliasable<*>) {
-            for (alias in (current as Aliasable<T>).aliases()!!) {
+            for (alias in (current as Aliasable<T>).aliases()) {
                 node.removeChild(alias.name)
             }
         }
         addition.accept(child)
         if (child is Aliasable<*>) {
             val aliases = (child as Aliasable<T>).aliases()
-            for (alias in aliases!!) {
+            for (alias in aliases) {
                 addition.accept(alias)
             }
             if (current != null) {
                 for (alias in aliases) {
                     for (grandchild in current.children) {
-                        alias!!.addChild(grandchild)
+                        alias.addChild(grandchild)
                     }
                 }
             }

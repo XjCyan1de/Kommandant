@@ -46,7 +46,7 @@ internal class SpigotMapper(private val dispatcher: CommandDispatcher<CommandSen
         } else if (suggestor == null) {
             return reparse(type as Type<*>)
         }
-        val client = CLIENT_SIDE!![suggestor]
+        val client = CLIENT_SIDE[suggestor]
         return client ?: reparse(suggestor)
     }
 

@@ -1,8 +1,8 @@
 package src.main.com.github.xjcyan1de.kommandant.util
 
-import src.main.com.github.xjcyan1de.kommandant.Mutable
 import com.mojang.brigadier.tree.CommandNode
 import com.mojang.brigadier.tree.RootCommandNode
+import src.main.com.github.xjcyan1de.kommandant.Mutable
 import java.util.*
 import java.util.function.Predicate
 

@@ -1,4 +1,3 @@
-
 package src.main.com.github.xjcyan1de.kommandant.util
 
 import com.mojang.brigadier.Command
@@ -27,8 +26,8 @@ object Commands {
         literals.remove(child)
         arguments.remove(child)
         if (removed is Aliasable<*>) {
-            for (alias in (removed as Aliasable<*>).aliases()!!) {
-                val name = alias!!.name
+            for (alias in (removed as Aliasable<*>).aliases()) {
+                val name = alias.name
                 children.remove(name)
                 literals.remove(name)
                 arguments.remove(name)

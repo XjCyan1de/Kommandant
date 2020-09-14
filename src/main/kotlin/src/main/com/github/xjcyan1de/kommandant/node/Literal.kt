@@ -29,11 +29,10 @@ class Literal<T>(
     private val addition: Consumer<CommandNode<T>>
     override val isAlias: Boolean
 
-    constructor(name: String, execution: Execution<T>, requirement: Predicate<T>) : this(name, execution, requirement, null, null, false) {}
+    constructor(name: String, execution: Execution<T>, requirement: Predicate<T>) : this(name, execution, requirement, null, null, false)
 
     @JvmOverloads
-    constructor(name: String, command: Command<T>, requirement: Predicate<T>, destination: CommandNode<T>? = null , modifier: RedirectModifier<T>? = null, fork: Boolean = false) : this(name, ArrayList<LiteralCommandNode<T>>(0), false, command, requirement, destination, modifier, fork) {
-    }
+    constructor(name: String, command: Command<T>, requirement: Predicate<T>, destination: CommandNode<T>? = null, modifier: RedirectModifier<T>? = null, fork: Boolean = false) : this(name, ArrayList<LiteralCommandNode<T>>(0), false, command, requirement, destination, modifier, fork)
 
     override fun addChild(child: CommandNode<T>) {
         addChild(this, child, addition)

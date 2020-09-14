@@ -9,7 +9,7 @@ import com.mojang.brigadier.context.StringRange
 import java.lang.invoke.MethodHandles
 
 class OptionalContext<T>(
-        private  val context: CommandContext<T>
+        private val context: CommandContext<T>
 ) : CommandContext<T?>(null, null, null, null, null, null, null, null, null, false) {
     private var arguments: Map<String, ParsedArgument<T, *>>? = null
 

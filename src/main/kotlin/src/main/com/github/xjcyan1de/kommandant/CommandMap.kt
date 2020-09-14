@@ -1,4 +1,3 @@
-
 package src.main.com.github.xjcyan1de.kommandant
 
 import com.mojang.brigadier.tree.LiteralCommandNode

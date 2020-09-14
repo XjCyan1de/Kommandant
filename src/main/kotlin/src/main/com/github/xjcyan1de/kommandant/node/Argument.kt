@@ -19,8 +19,8 @@ import java.util.function.Predicate
 class Argument<T, V>(name: String?, type: ArgumentType<V>?, command: Command<T>?, requirement: Predicate<T>?, private var destination: CommandNode<T>?, modifier: RedirectModifier<T>?, fork: Boolean, suggestions: SuggestionProvider<T>?) : ArgumentCommandNode<T, V>(name, type, command, requirement, destination, modifier, fork, suggestions), Mutable<T> {
     private val addition = Consumer { node: CommandNode<T> -> super.addChild(node) }
 
-    constructor(name: String?, type: ArgumentType<V>?, command: Command<T>?, requirement: Predicate<T>?, suggestions: SuggestionProvider<T>?) : this(name, type, command, requirement, null, null, false, suggestions) {}
-    constructor(name: String?, type: ArgumentType<V>?, execution: Execution<T>?, requirement: Predicate<T>?, suggestions: SuggestionProvider<T>?) : this(name, type, execution, requirement, null, null, false, suggestions) {}
+    constructor(name: String?, type: ArgumentType<V>?, command: Command<T>?, requirement: Predicate<T>?, suggestions: SuggestionProvider<T>?) : this(name, type, command, requirement, null, null, false, suggestions)
+    constructor(name: String?, type: ArgumentType<V>?, execution: Execution<T>?, requirement: Predicate<T>?, suggestions: SuggestionProvider<T>?) : this(name, type, execution, requirement, null, null, false, suggestions)
 
     override fun addChild(child: CommandNode<T>) {
         addChild(this, child, addition)

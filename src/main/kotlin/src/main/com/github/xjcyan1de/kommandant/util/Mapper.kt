@@ -61,6 +61,7 @@ open class Mapper<T, R> {
 
     companion object {
         val NONE: Command<*> = Command { context: CommandContext<Any?>? -> 0 }
+
         @JvmField
         val TRUE: Predicate<*> = Predicate { source: Any? -> true }
         val EMPTY: SuggestionProvider<*> = SuggestionProvider { suggestions: CommandContext<Any?>?, builder: SuggestionsBuilder -> builder.buildFuture() }
