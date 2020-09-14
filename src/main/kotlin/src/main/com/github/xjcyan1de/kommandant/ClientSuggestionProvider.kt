@@ -1,4 +1,4 @@
-package com.github.xjcyan1de.kommandant.spigot
+package src.main.com.github.xjcyan1de.kommandant
 
 import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.suggestion.SuggestionProvider
@@ -7,10 +7,10 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder
 import org.bukkit.command.CommandSender
 import java.util.concurrent.CompletableFuture
 
-enum class ClientSuggestionProvider : SuggestionProvider<CommandSender> {
+enum class ClientSuggestionProvider : SuggestionProvider<CommandSender?> {
     BIOMES, ENTITIES, RECIPES, SOUNDS;
 
-    override fun getSuggestions(context: CommandContext<CommandSender>, builder: SuggestionsBuilder): CompletableFuture<Suggestions> {
+    override fun getSuggestions(context: CommandContext<CommandSender?>, builder: SuggestionsBuilder): CompletableFuture<Suggestions> {
         return builder.buildFuture()
     }
 }

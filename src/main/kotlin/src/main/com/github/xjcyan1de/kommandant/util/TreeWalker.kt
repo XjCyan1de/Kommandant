@@ -1,20 +1,16 @@
-package com.github.xjcyan1de.kommandant.tree
+package src.main.com.github.xjcyan1de.kommandant.util
 
-import com.github.xjcyan1de.kommandant.Mutable
-import com.github.xjcyan1de.kommandant.util.remove
+import src.main.com.github.xjcyan1de.kommandant.Mutable
 import com.mojang.brigadier.tree.CommandNode
 import com.mojang.brigadier.tree.RootCommandNode
 import java.util.*
 import java.util.function.Predicate
 
-class TreeWalker<T, R>(
-        private val mapper: Mapper<T, R>
-) {
-    val mappings: MutableMap<CommandNode<T>, CommandNode<R>> = IdentityHashMap()
-
+class TreeWalker<T, R>(private val mapper: Mapper<T, R>) {
+    protected val mappings: MutableMap<CommandNode<T>, CommandNode<R>?>
     fun prune(root: RootCommandNode<R>, commands: Collection<CommandNode<T>>) {
         for (child in commands) {
-            root.remove(child.name)
+            Commands.remove(root, child.name)
             val result = map(child, null)
             if (result != null) {
                 root.addChild(result)
@@ -35,7 +31,7 @@ class TreeWalker<T, R>(
         mappings.clear()
     }
 
-    fun map(command: CommandNode<T>, source: T?): CommandNode<R>? {
+    protected fun map(command: CommandNode<T>, source: T?): CommandNode<R>? {
         if (source != null && command.requirement != null && !command.canUse(source)) {
             return null
         }
@@ -49,20 +45,22 @@ class TreeWalker<T, R>(
         return result
     }
 
-    @Suppress("UNCHECKED_CAST")
-    fun redirect(destination: CommandNode<T>?, result: CommandNode<R>, source: T?) {
+    protected fun redirect(destination: CommandNode<T>?, result: CommandNode<R>?, source: T?) {
         if (destination != null && result is Mutable<*>) {
-            result as Mutable<R>
-            result.setRedirect( map(destination, source))
+            (result as Mutable<R>).setRedirect(map(destination, source))
         }
     }
 
-    fun descend(children: Collection<CommandNode<T>>, command: CommandNode<R>, source: T?) {
+    protected fun descend(children: Collection<CommandNode<T>>, command: CommandNode<R>?, source: T?) {
         for (child in children) {
             val result = map(child, source)
             if (result != null) {
-                command.addChild(result)
+                command!!.addChild(result)
             }
         }
+    }
+
+    init {
+        mappings = IdentityHashMap()
     }
 }
