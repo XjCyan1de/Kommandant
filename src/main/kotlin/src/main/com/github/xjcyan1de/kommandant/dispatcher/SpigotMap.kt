@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender
 import org.bukkit.craftbukkit.v1_16_R2.command.CraftCommandMap
 import org.bukkit.plugin.Plugin
 import src.main.com.github.xjcyan1de.kommandant.Aliasable
-import src.main.com.github.xjcyan1de.kommandant.spigot.CommandMap
+import src.main.com.github.xjcyan1de.kommandant.CommandMap
 import java.util.*
 
 internal class SpigotMap(var prefix: String, var plugin: Plugin, var map: CraftCommandMap) : CommandMap {

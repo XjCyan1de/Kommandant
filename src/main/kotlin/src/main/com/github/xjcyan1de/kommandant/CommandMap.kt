@@ -1,9 +1,9 @@
 
-package src.main.com.github.xjcyan1de.kommandant.spigot
+package src.main.com.github.xjcyan1de.kommandant
 
-import src.main.com.github.xjcyan1de.kommandant.dispatcher.DispatcherCommand
 import com.mojang.brigadier.tree.LiteralCommandNode
 import org.bukkit.command.CommandSender
+import src.main.com.github.xjcyan1de.kommandant.dispatcher.DispatcherCommand
 
 interface CommandMap {
     fun register(command: LiteralCommandNode<CommandSender>): DispatcherCommand?
