@@ -31,6 +31,8 @@ class Dispatcher private constructor(
         }
     }
 
+    fun register(name: String, vararg aliases: String, builder: Literal.Builder<CommandSender>.()->Unit) = register(Literal(name, aliases.asIterable(), builder))
+
     fun register(command: Literal.Builder<CommandSender>): Literal<CommandSender> {
         val literal = command.build()
         getRoot().addChild(literal)
@@ -47,7 +49,7 @@ class Dispatcher private constructor(
     @EventHandler
     protected fun update(event: ServerLoadEvent?) {
         dispatcher = server.commandDispatcher.a()
-        walker.prune(dispatcher.root, root.children)
+        update()
     }
 
     override fun getRoot(): RootCommandNode<CommandSender> = root

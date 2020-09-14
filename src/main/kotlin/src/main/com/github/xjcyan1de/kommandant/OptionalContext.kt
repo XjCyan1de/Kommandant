@@ -7,10 +7,11 @@ import com.mojang.brigadier.context.ParsedArgument
 import com.mojang.brigadier.context.ParsedCommandNode
 import com.mojang.brigadier.context.StringRange
 import java.lang.invoke.MethodHandles
+import kotlin.reflect.KClass
 
 class OptionalContext<T>(
         private val context: CommandContext<T>
-) : CommandContext<T?>(null, null, null, null, null, null, null, null, null, false) {
+) : CommandContext<T>(null, null, null, null, null, null, null, null, null, false) {
     private var arguments: Map<String, ParsedArgument<T, *>>? = null
 
     companion object {
@@ -18,9 +19,9 @@ class OptionalContext<T>(
                 .findVarHandle(CommandContext::class.java, "arguments", MutableMap::class.java)
     }
 
-    fun <V> getOptionalArgument(name: String, type: Class<V>): V? {
-        return getOptionalArgument(name, type, null)
-    }
+    fun <V> getOptionalArgument(name: String, type: Class<V>): V? = getOptionalArgument(name, type, null)
+    fun <V : Any> getOptionalArgument(name: String, type: KClass<V>): V? = getOptionalArgument(name, type.java, null)
+    inline fun <reified V : Any> getOptionalArgument(name: String): V? = getOptionalArgument(name, V::class.java, null)
 
     fun <V> getOptionalArgument(name: String, type: Class<V>, value: V?): V? {
         if (arguments == null) {
@@ -33,50 +34,32 @@ class OptionalContext<T>(
             value
         }
     }
+    fun <V : Any> getOptionalArgument(name: String, type: KClass<V>, value: V?): V? = getOptionalArgument(name, type.java, value)
+    inline fun <reified V : Any> getOptionalArgument(name: String, value: V?): V? = getOptionalArgument(name, V::class.java, value)
 
-    override fun copyFor(source: T?): OptionalContext<T?> {
-        return OptionalContext(context.copyFor(source))
-    }
+    override fun copyFor(source: T): OptionalContext<T> = OptionalContext(context.copyFor(source))
 
-    override fun getChild(): CommandContext<T?> {
-        return context.child
-    }
+    override fun getChild(): CommandContext<T> = context.child
 
-    override fun getLastChild(): CommandContext<T?> {
-        return context.lastChild
-    }
+    override fun getLastChild(): CommandContext<T> = context.lastChild
 
-    override fun getCommand(): Command<T?> {
-        return context.command
-    }
+    override fun getCommand(): Command<T> = context.command
 
-    override fun getSource(): T? {
-        return context.source
-    }
+    override fun getSource(): T = context.source
 
-    override fun <V> getArgument(name: String, type: Class<V>): V {
-        return context.getArgument(name, type)
-    }
+    override fun <V> getArgument(name: String, type: Class<V>): V = context.getArgument(name, type)
+    fun <V : Any> getArgument(name: String, type: KClass<V>): V = context.getArgument(name, type.java)
+    inline fun <reified V : Any> getArgument(name: String): V = getArgument(name, V::class.java)
 
-    override fun getRedirectModifier(): RedirectModifier<T?> {
-        return context.redirectModifier
-    }
+    override fun getRedirectModifier(): RedirectModifier<T> = context.redirectModifier
 
-    override fun getRange(): StringRange {
-        return context.range
-    }
+    override fun getRange(): StringRange = context.range
 
-    override fun getInput(): String {
-        return context.input
-    }
+    override fun getInput(): String = context.input
 
-    override fun getNodes(): List<ParsedCommandNode<T?>> {
-        return context.nodes
-    }
+    override fun getNodes(): List<ParsedCommandNode<T>> = context.nodes
 
-    override fun isForked(): Boolean {
-        return context.isForked
-    }
+    override fun isForked(): Boolean = context.isForked
 
     override fun equals(other: Any?): Boolean {
         if (this === other) {

@@ -12,22 +12,20 @@ import src.main.com.github.xjcyan1de.kommandant.util.Commands.execution
 import src.main.com.github.xjcyan1de.kommandant.util.Commands.remove
 import src.main.com.github.xjcyan1de.kommandant.util.Nodes
 import src.main.com.github.xjcyan1de.kommandant.util.Nodes.addChild
-import java.util.*
 import java.util.function.Consumer
 import java.util.function.Predicate
-import kotlin.collections.ArrayList
 
 class Literal<T>(
         name: String,
         val aliases: MutableList<LiteralCommandNode<T>>,
-        alias: Boolean, command: Command<T>,
+        override val isAlias: Boolean,
+        command: Command<T>,
         requirement: Predicate<T>,
         private var destination: CommandNode<T>?,
         modifier: RedirectModifier<T>?,
         fork: Boolean
 ) : LiteralCommandNode<T>(name, command, requirement, destination, modifier, fork), Aliasable<T>, Mutable<T> {
-    private val addition: Consumer<CommandNode<T>>
-    override val isAlias: Boolean
+    private val addition = Consumer { node: CommandNode<T> -> super.addChild(node) }
 
     constructor(name: String, execution: Execution<T>, requirement: Predicate<T>) : this(name, execution, requirement, null, null, false)
 
@@ -74,9 +72,12 @@ class Literal<T>(
     class Builder<T>(var name: String) : Nodes.Builder<T, Builder<T>>() {
         var aliases: MutableList<String> = ArrayList(0)
 
-        fun alias(vararg aliases: String): Builder<T> {
-            Collections.addAll(this.aliases, *aliases)
-            return this
+        fun alias(vararg aliases: String): Builder<T> = apply {
+            this.aliases.addAll(aliases)
+        }
+
+        fun alias(aliases: Iterable<String>): Builder<T> = apply {
+            this.aliases.addAll(aliases)
         }
 
         override fun build(): Literal<T> {
@@ -96,10 +97,11 @@ class Literal<T>(
     }
 
     companion object {
+        @Suppress("UNCHECKED_CAST")
         fun <T> alias(command: LiteralCommandNode<T>, alias: String): Literal<T> {
             val literal = Literal(alias, ArrayList(0), true, command.command, command.requirement, command.redirect, command.redirectModifier, command.isFork)
             for (child in command.children) {
-                literal.addChild(child!!)
+                literal.addChild(child)
             }
             if (command is Aliasable<*>) {
                 (command as Aliasable<T>).aliases().add(literal)
@@ -115,9 +117,7 @@ class Literal<T>(
             return Builder(name)
         }
     }
-
-    init {
-        addition = Consumer { node: CommandNode<T>? -> super.addChild(node) }
-        isAlias = alias
-    }
 }
+
+fun Literal(name: String, vararg aliases: String, builder: Literal.Builder<CommandSender>.()->Unit) = Literal.of(name).alias(*aliases).apply(builder)
+fun Literal(name: String, aliases: Iterable<String>, builder: Literal.Builder<CommandSender>.()->Unit) = Literal.of(name).alias(aliases).apply(builder)
