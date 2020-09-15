@@ -1,12 +1,12 @@
-package src.main.com.github.xjcyan1de.kommandant.dispatcher
+package com.github.xjcyan1de.kommandant.dispatcher
 
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.tree.LiteralCommandNode
 import org.bukkit.command.CommandSender
 import org.bukkit.craftbukkit.v1_16_R2.command.CraftCommandMap
 import org.bukkit.plugin.Plugin
-import src.main.com.github.xjcyan1de.kommandant.Aliasable
-import src.main.com.github.xjcyan1de.kommandant.CommandMap
+import com.github.xjcyan1de.kommandant.Aliasable
+import com.github.xjcyan1de.kommandant.CommandMap
 import java.util.*
 
 internal class SpigotMap(var prefix: String, var plugin: Plugin, var map: CraftCommandMap) : CommandMap {

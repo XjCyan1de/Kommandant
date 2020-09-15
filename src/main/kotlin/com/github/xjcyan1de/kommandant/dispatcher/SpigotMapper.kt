@@ -1,4 +1,4 @@
-package src.main.com.github.xjcyan1de.kommandant.dispatcher
+package com.github.xjcyan1de.kommandant.dispatcher
 
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.ArgumentType
@@ -10,9 +10,9 @@ import com.mojang.brigadier.tree.CommandNode
 import net.minecraft.server.v1_16_R2.CommandListenerWrapper
 import net.minecraft.server.v1_16_R2.CompletionProviders
 import org.bukkit.command.CommandSender
-import src.main.com.github.xjcyan1de.kommandant.ClientSuggestionProvider
-import src.main.com.github.xjcyan1de.kommandant.Type
-import src.main.com.github.xjcyan1de.kommandant.util.Mapper
+import com.github.xjcyan1de.kommandant.ClientSuggestionProvider
+import com.github.xjcyan1de.kommandant.Type
+import com.github.xjcyan1de.kommandant.util.Mapper
 import java.util.*
 import java.util.function.Predicate
 

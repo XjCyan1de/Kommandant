@@ -1,5 +1,8 @@
-package src.main.com.github.xjcyan1de.kommandant.dispatcher
+package com.github.xjcyan1de.kommandant.dispatcher
 
+import com.github.xjcyan1de.kommandant.node.Literal
+import com.github.xjcyan1de.kommandant.node.Root
+import com.github.xjcyan1de.kommandant.util.TreeWalker
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.tree.CommandNode
 import com.mojang.brigadier.tree.RootCommandNode
@@ -13,9 +16,6 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.server.ServerLoadEvent
 import org.bukkit.plugin.Plugin
-import src.main.com.github.xjcyan1de.kommandant.node.Literal
-import src.main.com.github.xjcyan1de.kommandant.node.Root
-import src.main.com.github.xjcyan1de.kommandant.util.TreeWalker
 
 class Dispatcher private constructor(
         server: Server,

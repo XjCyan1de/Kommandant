@@ -1,4 +1,4 @@
-package src.main.com.github.xjcyan1de.kommandant.dispatcher
+package com.github.xjcyan1de.kommandant.dispatcher
 
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.StringReader
@@ -7,7 +7,7 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.PluginIdentifiableCommand
 import org.bukkit.plugin.Plugin
-import src.main.com.github.xjcyan1de.kommandant.util.Exceptions.report
+import com.github.xjcyan1de.kommandant.util.Exceptions.report
 
 class DispatcherCommand(
         name: String,

@@ -1,4 +1,4 @@
-package src.main.com.github.xjcyan1de.kommandant.util
+package com.github.xjcyan1de.kommandant.util
 
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.arguments.ArgumentType
@@ -9,8 +9,8 @@ import com.mojang.brigadier.tree.ArgumentCommandNode
 import com.mojang.brigadier.tree.CommandNode
 import com.mojang.brigadier.tree.LiteralCommandNode
 import com.mojang.brigadier.tree.RootCommandNode
-import src.main.com.github.xjcyan1de.kommandant.node.Argument
-import src.main.com.github.xjcyan1de.kommandant.node.Literal
+import com.github.xjcyan1de.kommandant.node.Argument
+import com.github.xjcyan1de.kommandant.node.Literal
 import java.util.function.Predicate
 
 open class Mapper<T, R> {

@@ -1,8 +1,8 @@
-package src.main.com.github.xjcyan1de.kommandant.util
+package com.github.xjcyan1de.kommandant.util
 
+import com.github.xjcyan1de.kommandant.Aliasable
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.tree.CommandNode
-import src.main.com.github.xjcyan1de.kommandant.Aliasable
 import java.lang.invoke.MethodHandles
 
 object Commands {

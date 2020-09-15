@@ -1,14 +1,14 @@
-package src.main.com.github.xjcyan1de.kommandant.node
+package com.github.xjcyan1de.kommandant.node
 
+import com.github.xjcyan1de.kommandant.Aliasable
+import com.github.xjcyan1de.kommandant.CommandMap
+import com.github.xjcyan1de.kommandant.Mutable
+import com.github.xjcyan1de.kommandant.util.Commands.remove
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.tree.CommandNode
 import com.mojang.brigadier.tree.LiteralCommandNode
 import com.mojang.brigadier.tree.RootCommandNode
 import org.bukkit.command.CommandSender
-import src.main.com.github.xjcyan1de.kommandant.Aliasable
-import src.main.com.github.xjcyan1de.kommandant.CommandMap
-import src.main.com.github.xjcyan1de.kommandant.Mutable
-import src.main.com.github.xjcyan1de.kommandant.util.Commands.remove
 import java.util.*
 
 class Root(private val prefix: String, private val map: CommandMap) : RootCommandNode<CommandSender>(), Mutable<CommandSender> {

@@ -1,4 +1,4 @@
-package src.main.com.github.xjcyan1de.kommandant
+package com.github.xjcyan1de.kommandant
 
 import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.suggestion.SuggestionProvider

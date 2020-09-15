@@ -9,7 +9,10 @@ repositories {
 
 allprojects {
     apply(plugin = "kotlin")
-    apply(plugin = "maven")
+    apply(plugin = "maven-publish")
+
+    group = "com.github.xjcyan1de"
+    version = "1.0.0-SNAPSHOT"
 
     repositories {
         mavenLocal()
@@ -17,7 +20,24 @@ allprojects {
     }
 
     dependencies {
-//        compileOnly("com.mojang", "brigadier", "1.0.17")
+        compileOnly("com.mojang", "brigadier", "1.0.17")
         compileOnly("com.destroystokyo.paper", "paper", "1.16.3-R0.1-SNAPSHOT")
+    }
+
+    publishing {
+        val sourcesJar by tasks.creating(Jar::class) {
+            archiveClassifier.set("sources")
+            from(sourceSets.getByName("main").allSource)
+        }
+
+        publications {
+            create<MavenPublication>("maven") {
+                groupId = this@allprojects.group.toString()
+                artifactId = this@allprojects.name
+                version = this@allprojects.version.toString()
+                artifact(sourcesJar)
+                from(components["java"])
+            }
+        }
     }
 }

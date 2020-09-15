@@ -1,4 +1,4 @@
-package src.main.com.github.xjcyan1de.kommandant.node
+package com.github.xjcyan1de.kommandant.node
 
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.RedirectModifier
@@ -9,12 +9,12 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder
 import com.mojang.brigadier.tree.ArgumentCommandNode
 import com.mojang.brigadier.tree.CommandNode
 import org.bukkit.command.CommandSender
-import src.main.com.github.xjcyan1de.kommandant.Execution
-import src.main.com.github.xjcyan1de.kommandant.Mutable
-import src.main.com.github.xjcyan1de.kommandant.util.Commands.execution
-import src.main.com.github.xjcyan1de.kommandant.util.Commands.remove
-import src.main.com.github.xjcyan1de.kommandant.util.Nodes
-import src.main.com.github.xjcyan1de.kommandant.util.Nodes.addChild
+import com.github.xjcyan1de.kommandant.Execution
+import com.github.xjcyan1de.kommandant.Mutable
+import com.github.xjcyan1de.kommandant.util.Commands.execution
+import com.github.xjcyan1de.kommandant.util.Commands.remove
+import com.github.xjcyan1de.kommandant.util.Nodes
+import com.github.xjcyan1de.kommandant.util.Nodes.addChild
 import java.util.function.Consumer
 import java.util.function.Predicate
 

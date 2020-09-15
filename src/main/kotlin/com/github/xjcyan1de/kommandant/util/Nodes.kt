@@ -1,14 +1,14 @@
-package src.main.com.github.xjcyan1de.kommandant.util
+package com.github.xjcyan1de.kommandant.util
 
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.arguments.*
 import com.mojang.brigadier.builder.ArgumentBuilder
 import com.mojang.brigadier.tree.CommandNode
-import src.main.com.github.xjcyan1de.kommandant.Aliasable
-import src.main.com.github.xjcyan1de.kommandant.Execution
-import src.main.com.github.xjcyan1de.kommandant.Mutable
-import src.main.com.github.xjcyan1de.kommandant.OptionalContext
-import src.main.com.github.xjcyan1de.kommandant.node.Argument
+import com.github.xjcyan1de.kommandant.Aliasable
+import com.github.xjcyan1de.kommandant.Execution
+import com.github.xjcyan1de.kommandant.Mutable
+import com.github.xjcyan1de.kommandant.OptionalContext
+import com.github.xjcyan1de.kommandant.node.Argument
 import java.util.function.Consumer
 
 object Nodes {

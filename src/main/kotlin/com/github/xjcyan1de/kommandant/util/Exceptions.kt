@@ -1,4 +1,4 @@
-package src.main.com.github.xjcyan1de.kommandant.util
+package com.github.xjcyan1de.kommandant.util
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException
 import net.minecraft.server.v1_16_R2.*

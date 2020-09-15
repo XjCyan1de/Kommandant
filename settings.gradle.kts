@@ -1,3 +1,4 @@
+rootProject.name = "Kommandant"
 pluginManagement {
     val kotlinVersion: String by settings
 
