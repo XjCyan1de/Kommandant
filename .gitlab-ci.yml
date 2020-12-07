@@ -1,0 +1,11 @@
+stages:
+  - build
+build & publish:
+  stage: build
+  image: gradle:latest
+  tags:
+    - gitlab-org
+  only:
+    - master
+  script:
+    - gradle build publish
