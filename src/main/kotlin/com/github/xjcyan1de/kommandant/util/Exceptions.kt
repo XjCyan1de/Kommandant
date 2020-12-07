@@ -1,13 +1,13 @@
 package com.github.xjcyan1de.kommandant.util
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException
-import net.minecraft.server.v1_16_R2.*
+import net.minecraft.server.v1_16_R3.*
 import org.bukkit.command.*
-import org.bukkit.craftbukkit.v1_16_R2.CraftServer
-import org.bukkit.craftbukkit.v1_16_R2.command.CraftBlockCommandSender
-import org.bukkit.craftbukkit.v1_16_R2.command.ProxiedNativeCommandSender
-import org.bukkit.craftbukkit.v1_16_R2.entity.CraftMinecartCommand
-import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer
+import org.bukkit.craftbukkit.v1_16_R3.CraftServer
+import org.bukkit.craftbukkit.v1_16_R3.command.CraftBlockCommandSender
+import org.bukkit.craftbukkit.v1_16_R3.command.ProxiedNativeCommandSender
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftMinecartCommand
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer
 import org.bukkit.entity.Player
 import org.bukkit.entity.minecart.CommandMinecart
 import kotlin.math.max

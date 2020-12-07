@@ -7,8 +7,8 @@ import com.mojang.brigadier.suggestion.SuggestionProvider
 import com.mojang.brigadier.suggestion.SuggestionsBuilder
 import com.mojang.brigadier.tree.ArgumentCommandNode
 import com.mojang.brigadier.tree.CommandNode
-import net.minecraft.server.v1_16_R2.CommandListenerWrapper
-import net.minecraft.server.v1_16_R2.CompletionProviders
+import net.minecraft.server.v1_16_R3.CommandListenerWrapper
+import net.minecraft.server.v1_16_R3.CompletionProviders
 import org.bukkit.command.CommandSender
 import com.github.xjcyan1de.kommandant.ClientSuggestionProvider
 import com.github.xjcyan1de.kommandant.Type

@@ -6,12 +6,12 @@ import com.github.xjcyan1de.kommandant.util.TreeWalker
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.tree.CommandNode
 import com.mojang.brigadier.tree.RootCommandNode
-import net.minecraft.server.v1_16_R2.CommandListenerWrapper
-import net.minecraft.server.v1_16_R2.MinecraftServer
+import net.minecraft.server.v1_16_R3.CommandListenerWrapper
+import net.minecraft.server.v1_16_R3.MinecraftServer
 import org.bukkit.Server
 import org.bukkit.command.CommandSender
-import org.bukkit.craftbukkit.v1_16_R2.CraftServer
-import org.bukkit.craftbukkit.v1_16_R2.command.CraftCommandMap
+import org.bukkit.craftbukkit.v1_16_R3.CraftServer
+import org.bukkit.craftbukkit.v1_16_R3.command.CraftCommandMap
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.server.ServerLoadEvent
