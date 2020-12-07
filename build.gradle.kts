@@ -25,6 +25,28 @@ allprojects {
         compileOnly("com.destroystokyo.paper", "paper", "1.16.4-R0.1-SNAPSHOT")
     }
 
+    tasks {
+        java {
+            targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = JavaVersion.VERSION_11
+        }
+
+        val kotlinOptions: org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions.() -> Unit = {
+            jvmTarget = "11"
+            freeCompilerArgs = listOf(
+                "-Xjvm-default=all",
+                "-Xopt-in=kotlin.RequiresOptIn"
+            )
+        }
+
+        compileKotlin {
+            kotlinOptions(kotlinOptions)
+        }
+        compileTestKotlin {
+            kotlinOptions(kotlinOptions)
+        }
+    }
+
     publishing {
         val sourcesJar by tasks.creating(Jar::class) {
             archiveClassifier.set("sources")
