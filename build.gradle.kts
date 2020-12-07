@@ -63,5 +63,19 @@ allprojects {
                 from(components["java"])
             }
         }
+
+        repositories {
+            if (System.getenv("CI_JOB_TOKEN") != null) {
+                maven("https://gitlab.com/api/v4/projects/${System.getenv("CI_PROJECT_ID")}/packages/maven") {
+                    credentials(HttpHeaderCredentials::class) {
+                        name = "Job-Token"
+                        value = System.getenv("CI_JOB_TOKEN")
+                    }
+                    authentication {
+                        create<HttpHeaderAuthentication>("header")
+                    }
+                }
+            }
+        }
     }
 }
