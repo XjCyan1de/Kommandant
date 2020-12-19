@@ -13,7 +13,7 @@ allprojects {
     apply(plugin = "maven-publish")
 
     group = "com.github.xjcyan1de"
-    version = "1.0.0-SNAPSHOT"
+    version = "1.1.0-SNAPSHOT"
 
     repositories {
         mavenLocal()
